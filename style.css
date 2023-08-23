@@ -5,7 +5,9 @@
 }
 
 body{
-    background-color: rgba(245, 225, 197, 0.821);
+    background: linear-gradient(to bottom, #ffffff, #f6dbbf);
+    height: 100vh;
+    overflow: hidden;
 }
 
 
@@ -17,7 +19,7 @@ body{
     justify-content: center;
     padding: 22px;
     width: 20.2rem;
-    background-color: rgb(46, 45, 45);
+    background-color: rgb(61, 58, 58);
     border-radius: 10px;
     box-shadow: rgb(0, 0, 0) 1px 5px 16px;}
 
@@ -58,7 +60,7 @@ body{
     border: 0;
     font-size: 1.2rem;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    background-color: rgba(66, 61, 61, 0.94);
+    background-color: rgba(80, 75, 75, 0.94);
     border-radius: 50px;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.216) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
