@@ -4,53 +4,70 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: rgba(245, 225, 197, 0.821);
+}
+
 
 .container{
-    margin: 100px auto;
+    margin: 70px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
-    padding: 20px;
-    width: 20.5rem;
-    background-color: black;
+    padding: 22px;
+    width: 20.2rem;
+    background-color: rgb(46, 45, 45);
     border-radius: 10px;
-}
+    box-shadow: rgb(0, 0, 0) 1px 5px 16px;}
 
 .display{
-    background-color: aliceblue;
-    margin: 0.2rem;
-    width: 18.4rem;
-    height: 6.3rem;
-    border: 1px solid rgb(88, 88, 88);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background-color: rgb(33, 31, 31);
+    width: 18rem;
+    height: 5.3rem;
     border-radius: 15px;
-    padding: 7px;
-    color: black;
-    font-size: 1.7rem;
+    padding: 1rem;
+    color: white;
+    font-size: 2rem;
     text-align: right;
+    letter-spacing: 0.3rem;
+}
+
+
+.title{
+    font-size: 1.4rem;
+    margin-bottom: 13px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 0.3rem;
+    color: rgba(100, 101, 101, 0.938);
 }
 
 .buttons{
-    margin-top: 17px;
+    margin-top: 22px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 8px;
+    grid-gap: 13px;
 }
 
 .btn{
-    padding: 0.9rem;
+    padding: 1rem;
     outline:0;
     border: 0;
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    background-color: rgb(210, 213, 215);
+    background-color: rgba(66, 61, 61, 0.94);
     border-radius: 50px;
     text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.216) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    color: white;
 }
 
 .equal{
     grid-column: span 2;
+    background-color: rgba(236, 151, 22, 0.903);
 }
 
 .btn:hover{
@@ -59,3 +76,37 @@
     transition: 0.2s ease;
 }
 
+.operator{
+    background-color: rgb(99, 98, 98);
+    transition: 0.2s ease;
+}
+
+.clear:hover{
+    color: rgb(255, 149, 0);
+}
+
+@media(max-width:768px){
+    .btn{
+        font-size: 1.1rem;
+        padding: 0.8rem;
+    }
+
+    .display{
+        width:  16rem;
+        height: 4.7rem;
+        font-size: 1.7rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .container{
+        width: 18.5rem;
+    }
+
+    .buttons{
+        grid-gap: 14px;
+    }
+
+    .title{
+        font-size: 1.25rem;
+    }
+}

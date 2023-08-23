@@ -1,12 +1,123 @@
 'use strict';
 
 const display = document.querySelector('.display');
-const clearButton = document.querySelector('.clear');
-const deleteButton = document.querySelector('.delete');
-const equalsButton = document.querySelector('.equal');
-const equation = document.querySelectorAll('[data-value]'); 
-const operatorButtons = document.querySelectorAll('.operator');
-const buttons = document.querySelectorAll('.btn');
+const buttons = document.querySelectorAll('[value]'); 
+
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
+const percentage = (a) => a/100;
 
 
+const maxDisplayLength = 12; 
+let displayValue = '';
+let numberOne = 0; 
+let numberTwo = 0;
+let operation = '';
 
+
+function operate(operation, x, y) {
+    if (operation === '+') return add(x, y);
+    if (operation === '-') return subtract(x, y);
+    if (operation === '×') return multiply(x, y);
+    if (operation === '÷') {
+        if (y === 0) {
+            alert('You cannot divide by zero!')
+            displayValue = '';
+            return '';
+        }
+        return divide(x, y);
+    }
+    if (operation === '%') return percentage(x)
+}
+
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const buttonValue = button.value;
+
+        if (buttonValue === 'clear'){
+            clearDisplay();
+
+
+        } else if (buttonValue === 'delete') {
+            deleteDigits();
+
+
+        } else if ('+-×÷%'.includes(buttonValue)) {
+            if (operation !== '' && !'×÷'.includes(displayValue[displayValue.length - 2])) {
+                numberTwo = parseFloat(displayValue.split(' ').pop());
+                numberOne = operate(operation, numberOne, numberTwo);
+                operation = buttonValue;
+                displayValue = `${numberOne} ${operation} `;
+            } else {
+                numberOne = parseFloat(displayValue);
+                operation = buttonValue;
+                displayValue += ` ${operation} `;
+            }
+
+            
+        } else if (buttonValue === '=') {
+            if (operation !== '' && displayValue[displayValue.length - 2] === operation) {
+                displayValue = displayValue.slice(0, -3);
+            }
+            numberTwo = parseFloat(displayValue.split(' ').pop());
+            numberOne = operate(operation, numberOne, numberTwo);
+            displayValue = numberOne.toString();
+            operation = '';
+
+
+        } else if (buttonValue === '.') {
+            addDecimal();
+            
+        } else {
+            appendDigit(buttonValue);
+        }
+
+        updateDisplay();
+    });
+});
+
+
+function appendDigit(digit) {
+    if (displayValue.length < maxDisplayLength) {
+        if (displayValue === '0') {
+            displayValue = digit;
+        } else {
+            displayValue += digit;
+        }
+    }
+}
+
+
+function clearDisplay(){
+    displayValue = '';
+    numberOne = 0;
+    numberTwo = 0;
+    operation = '';
+    updateDisplay()
+}
+
+
+function updateDisplay(){
+    if (displayValue.length > maxDisplayLength) {
+        display.textContent = 'Error';
+    } else {
+        display.textContent = displayValue;
+    }
+}
+
+
+function deleteDigits() {
+    if (displayValue !== '') {
+        displayValue = displayValue.slice(0, -1); 
+    }
+}
+
+
+function addDecimal() {
+    if (!displayValue.includes('.')) {
+        displayValue += '.'; 
+    }
+}
