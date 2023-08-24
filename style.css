@@ -89,26 +89,22 @@ body{
 
 @media(max-width:768px){
     .btn{
-        font-size: 1.1rem;
-        padding: 0.8rem;
+        font-size: 1.25rem;
+        padding: 0.9rem;
     }
 
     .display{
-        width:  16rem;
-        height: 4.7rem;
+        width:  17rem;
+        height: 4.9rem;
         font-size: 1.7rem;
         letter-spacing: 0.3rem;
     }
 
     .container{
-        width: 18.5rem;
-    }
-
-    .buttons{
-        grid-gap: 14px;
+        width: 20rem;
     }
 
     .title{
-        font-size: 1.25rem;
+        font-size: 1.27rem;
     }
 }

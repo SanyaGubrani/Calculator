@@ -3,6 +3,7 @@
 const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('[value]'); 
 
+
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
@@ -29,7 +30,8 @@ function operate(operation, x, y) {
         }
         return divide(x, y);
     }
-    if (operation === '%') return percentage(x)
+
+    if (operation === '%') return percentage(x);
 }
 
 
@@ -40,33 +42,14 @@ buttons.forEach(button => {
         if (buttonValue === 'clear'){
             clearDisplay();
 
-
         } else if (buttonValue === 'delete') {
             deleteDigits();
 
-
         } else if ('+-×÷%'.includes(buttonValue)) {
-            if (operation !== '' && !'×÷'.includes(displayValue[displayValue.length - 2])) {
-                numberTwo = parseFloat(displayValue.split(' ').pop());
-                numberOne = operate(operation, numberOne, numberTwo);
-                operation = buttonValue;
-                displayValue = `${numberOne} ${operation} `;
-            } else {
-                numberOne = parseFloat(displayValue);
-                operation = buttonValue;
-                displayValue += ` ${operation} `;
-            }
-
-            
+            OperationFunction(buttonValue)
+  
         } else if (buttonValue === '=') {
-            if (operation !== '' && displayValue[displayValue.length - 2] === operation) {
-                displayValue = displayValue.slice(0, -3);
-            }
-            numberTwo = parseFloat(displayValue.split(' ').pop());
-            numberOne = operate(operation, numberOne, numberTwo);
-            displayValue = numberOne.toString();
-            operation = '';
-
+            equalsButton();
 
         } else if (buttonValue === '.') {
             addDecimal();
@@ -80,12 +63,39 @@ buttons.forEach(button => {
 });
 
 
+function OperationFunction(buttonValue) {
+    if (operation !== ''){
+        calculation();
+    }
+    numberOne = parseFloat(displayValue);
+    operation = buttonValue;
+    displayValue = `${numberOne} ${operation} `;
+}
+
+
+function equalsButton() {
+    if (operation !== '' && displayValue[displayValue.length - 2] === operation) {
+        displayValue = displayValue.slice(0, -3);
+    }
+    calculation();
+    operation = '';
+}
+
+
+function calculation() {
+    numberTwo = parseFloat(displayValue.split(' ').pop());
+    numberOne = operate(operation, numberOne, numberTwo);
+    displayValue = numberOne.toString();
+}
+
+
 function appendDigit(digit) {
     if (displayValue.length < maxDisplayLength) {
         if (displayValue === '0') {
             displayValue = digit;
         } else {
             displayValue += digit;
+  
         }
     }
 }
@@ -100,15 +110,6 @@ function clearDisplay(){
 }
 
 
-function updateDisplay(){
-    if (displayValue.length > maxDisplayLength) {
-        display.textContent = 'Error';
-    } else {
-        display.textContent = displayValue;
-    }
-}
-
-
 function deleteDigits() {
     if (displayValue !== '') {
         displayValue = displayValue.slice(0, -1); 
@@ -117,7 +118,13 @@ function deleteDigits() {
 
 
 function addDecimal() {
-    if (!displayValue.includes('.')) {
-        displayValue += '.'; 
+    if (displayValue === '' || displayValue.endsWith('.')) {
+        return; 
     }
+    displayValue += '.';
+}
+
+
+function updateDisplay(){
+    display.textContent = displayValue.length > maxDisplayLength ? 'Error' : displayValue;
 }
