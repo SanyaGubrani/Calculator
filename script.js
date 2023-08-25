@@ -12,6 +12,7 @@ const divide = (a, b) => a / b;
 const percentage = (a) => a/100;
 
 
+let isDigit = false;
 const maxDisplayLength = 12; 
 let displayValue = '';
 let numberOne = 0; 
@@ -42,6 +43,10 @@ buttons.forEach(button => {
     button.addEventListener('click', () => {
         const buttonValue = button.value;
 
+        if (!isDigit && '+-×÷%'.includes(buttonValue)) {
+            return;
+        }
+
         if (buttonValue === 'clear'){
             clearDisplay();
 
@@ -49,6 +54,10 @@ buttons.forEach(button => {
             deleteDigits();
 
         } else if ('+-×÷%'.includes(buttonValue)) {
+            if (!isDigit) {
+                return;
+            }
+            isDigit = false;
             OperationFunction(buttonValue)
   
         } else if (buttonValue === '=') {
@@ -58,6 +67,7 @@ buttons.forEach(button => {
             addDecimal();
             
         } else {
+            isDigit = true;
             appendDigit(buttonValue);
         }
 
